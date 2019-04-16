@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
 import gamesList from './games.js';
 
 console.log(gamesList);
@@ -14,6 +13,7 @@ class KrazyKeetGames extends React.Component{
   render(i){
     return(
       <div className="App">
+      <NavBar/>
         <ul>{gameArray}</ul>
       </div>
       );
@@ -21,13 +21,26 @@ class KrazyKeetGames extends React.Component{
 }
 
 const gameArray = gamesList.map((item, index)=>
-  <li key={index}>
+  <li className="game_graphic" id={index} key={index}>
     <img src={item.background}></img>
-    <h2>{item.name}</h2>
-    <span>{item.version}</span>
-    <span>{item.description}</span>
+    <div className="text_box">
+      <h2>{item.name}</h2>
+      <span>{item.version}</span>
+      <span>{item.description}</span>
+    </div>
   </li>
 );
+
+const navArray = gamesList.map((item, index)=>
+  <li key={index} onClick={() => navigate(index)}>
+    <img src={item.thumb}></img>
+  </li>
+);
+
+const navigate = function(i){
+  console.log(i);
+  document.getElementById(i).scrollIntoView();
+}
 
 class TitleBanner extends React.Component{
   render(){
@@ -39,4 +52,13 @@ class TitleBanner extends React.Component{
   }
 }
 
+class NavBar extends React.Component{
+  render() {
+    return (
+      <nav className="container">
+        <ul>{navArray}</ul>
+      </nav>
+    );
+  }
+}
 export default KrazyKeetGames;
