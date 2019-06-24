@@ -5,5 +5,16 @@ import './index.css';
 // import './app.css';
 // import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// let kkgState = this;
+let gameList = [];
+fetch('http://localhost:8080/game')
+.then(function(response) {
+  return response.json();
+})
+.then(function(myJson) {
+  gameList = myJson;
+  // kkgState.setState({games: myJson});
+  ReactDOM.render(<App games={gameList}/>, document.getElementById('root'));
+});
+
 // registerServiceWorker();
