@@ -1,24 +1,42 @@
 import React, { Component } from 'react';
 
-const krazyKeetGames = (props) =>{
-  return(
-    <div className="App">
-      <h1>Krazy Keet Games LLC</h1>
-      <AnimateBanner games={props.games}/>
-      <NavBar games={props.games}/>
-      <div className="container">
-        <ul>{gameArray(props)}</ul>
+class krazyKeetGames extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {games:this.props.games, gamesAll:this.props.games};
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event){
+    console.log(event.target.value);
+    this.setState({games:filterGames(this.state.gamesAll, event.target.value)})
+  }
+
+  render(){
+    return(
+      <div className="App">
+        <div className="flex head">
+          <h1>Krazy Keet Games LLC</h1>
+            <input className="search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
+        </div>
+        <AnimateBanner games={this.props.games}/>
+        <NavBar games={this.state.games}/>
+        <div className="container">
+          <ul>{gameArray(this.state)}</ul>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-       // <img className="game_main" src={item.background}></img>
+
+
 const gameArray = (props) => {
+  // let allGames = props;
   return (
-    props.games.map((item, index)=>
+    filterGames(props.games).map((item, index)=>
       <li className="game" id={index} key={index}>
         <div className="game_main">
-          <img src={item.background}></img>
+          <img className="game_main_img" src={item.background}></img>
         </div>
         <div className="text_box">
           <h2>{item.name}</h2>
@@ -37,6 +55,16 @@ const gameArray = (props) => {
       </li>
     )
   );
+}
+
+
+const filterGames = (props, filterBy) => {
+  if(filterBy){
+    let newArray = props.filter(game => game.name.toLowerCase().includes(filterBy.toLowerCase()));
+    return newArray;
+  }else{
+    return props;
+  }
 }
 
 const navigate = (i) =>{
@@ -61,7 +89,7 @@ class AnimateBanner extends React.Component{
   render() {
     return(
       <div className="jumbotron" onClick={() => navigate(this.state.index)}>
-        <img src={this.state.banner} alt="krazyKeetGames"/>
+        <img className="game_main_img" src={this.state.banner} alt="krazyKeetGames"/>
       </div>
     )
   }
@@ -74,7 +102,7 @@ const NavBar = (props) => {
         {
           props.games.map((item, index)=>
             <li key={index} onClick={() => navigate(index)}>
-              <img src={item.thumb} alt={item.name}/>
+              <img className="" src={item.thumb} alt={item.name}/>
             </li>
           )
         }

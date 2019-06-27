@@ -2,10 +2,13 @@
 
 body{
   background-color: #333333;
+  background-image: url('webbackground.jpg');
+  background-size: contain;
   color: #ffffff;
   text-shadow: 5px, 5px, 5px, #111111;
 }
 .jumbotron {
+  background-color: #333333;
   overflow: hidden;
   height: 300px;
 }
@@ -21,12 +24,13 @@ h1{
 }
 ul {
   list-style: none;
+  padding-inline-start: 0px;
 }
 .navbar li {
   padding: 5px;
   display: inline;
 }
-.navbar, .media{
+.navbar, .media, .head{
   justify-content: space-around;
 }
 .game{
@@ -35,8 +39,11 @@ ul {
 .game_main {
   overflow: hidden;
 }
-.game_main img {
-  width: 100%;
+.game_main_img {
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .flex{
   display:flex;
@@ -54,4 +61,24 @@ ul {
 .button:hover{
   color: #ffffff;
   background-color: rgb(70,70,255);
+}
+.search{
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-bottom:20px;
+  width: 250px;
+  background-color: #333333;
+  font-size: 2em;
+  border-style: none;
+  border-bottom: 2px solid #ffffff;
+  border-radius: 5px;
+}
+.head {
+  background-color: #555555;
+  border-bottom: 2px solid #ffffff;
+}
+
+.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
 }

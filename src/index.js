@@ -14,7 +14,7 @@ fetch('http://localhost:8080/game')
 .then(function(myJson) {
   gameList = myJson;
   // kkgState.setState({games: myJson});
-  ReactDOM.render(<App games={gameList}/>, document.getElementById('root'));
+  ReactDOM.render(<App games={gameList} showngames={gameList}/>, document.getElementById('root'));
 });
 
 // registerServiceWorker();
