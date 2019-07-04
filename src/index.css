@@ -19,9 +19,37 @@ body{
 h1{
   padding-bottom: 20px;
 }
-.jumbotron img{
-  margin-top: -200px;
+
+.container {
+  padding:100px;
 }
+.text_box{
+  display:inline;
+  margin-top: -300px;
+}
+.jumbotron img{
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 30s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  0% {margin-top: -300px;}
+  50% {margin-top: -100px;}
+  100% {margin-top: -300px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  0% {margin-top: -300px;}
+  50% {margin-top: -100px;}
+  100% {margin-top: -300px;}
+}
+
 ul {
   list-style: none;
   padding-inline-start: 0px;
@@ -81,4 +109,10 @@ ul {
 .grayscale {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+}
+.hidden {
+  display:none;
+}
+.inline {
+  display:inline;
 }

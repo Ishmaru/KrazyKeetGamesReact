@@ -7,7 +7,7 @@ import './index.css';
 
 // let kkgState = this;
 let gameList = [];
-fetch('http://localhost:8080/game')
+fetch('http://localhost:8080/api/game')
 .then(function(response) {
   return response.json();
 })

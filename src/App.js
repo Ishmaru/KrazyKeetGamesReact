@@ -8,7 +8,6 @@ class krazyKeetGames extends React.Component{
   }
 
   handleChange(event){
-    console.log(event.target.value);
     this.setState({games:filterGames(this.state.gamesAll, event.target.value)})
   }
 
@@ -17,10 +16,10 @@ class krazyKeetGames extends React.Component{
       <div className="App">
         <div className="flex head">
           <h1>Krazy Keet Games LLC</h1>
-            <input className="search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
+            <input className="search" placeholder="Search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
         </div>
-        <AnimateBanner games={this.props.games}/>
-        <NavBar games={this.state.games}/>
+        {this.state.games.length > 1 ? <AnimateBanner games={this.props.games}/> : null}
+        {this.state.games.length > 1 ? <NavBar games={this.state.games}/> : null}
         <div className="container">
           <ul>{gameArray(this.state)}</ul>
         </div>
@@ -29,6 +28,14 @@ class krazyKeetGames extends React.Component{
   }
 }
 
+const handleClick = (event) =>{
+  // event.target.className = "game_main_img text_box grayscale"
+  event.target.parentNode.className = "game_main hidden inline";
+  let indexValue = event.target.id.split("_")[1];
+  let parent = event.target.parentNode.nextSibling;
+  parent.className = "text_box";
+  // console.log(event.target);
+}
 
 const gameArray = (props) => {
   // let allGames = props;
@@ -36,17 +43,17 @@ const gameArray = (props) => {
     filterGames(props.games).map((item, index)=>
       <li className="game" id={index} key={index}>
         <div className="game_main">
-          <img className="game_main_img" src={item.background}></img>
+          <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background}></img>
         </div>
-        <div className="text_box">
+        <div className="hidden">
           <h2>{item.name}</h2>
           <p>{item.version}</p>
           <p>{item.description}</p>
           <p>{item.details}</p>
           <div className="media flex">
-            <img src={item.media[0]}></img>
-            <img src={item.media[1]}></img>
-            <img src={item.media[2]}></img>
+            <img src={item.media[0]} width="300px"></img>
+            <img src={item.media[1]}width="300px"></img>
+            <img src={item.media[2]}width="300px"></img>
           </div>
           <div className="button" target="_blank" href={item.youtube}>Trailer</div>
           <div className="button" target="_blank" href={item.download}>Download</div>
@@ -83,7 +90,7 @@ class AnimateBanner extends React.Component{
         banner : this.props.games[indexvalue].background,
         index: indexvalue
       });
-    }, 7000);
+    }, 8000);
   }
 
   render() {
