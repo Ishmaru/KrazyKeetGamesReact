@@ -12,7 +12,8 @@ fetch('http://localhost:8080/api/game')
   return response.json();
 })
 .then(function(myJson) {
-  gameList = myJson;
+  let gameList = myJson;
+  console.log(gameList);
   // kkgState.setState({games: myJson});
   ReactDOM.render(<App games={gameList} showngames={gameList}/>, document.getElementById('root'));
 });

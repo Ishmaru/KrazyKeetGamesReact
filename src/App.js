@@ -40,7 +40,7 @@ const handleClick = (event) =>{
 const gameArray = (props) => {
   // let allGames = props;
   return (
-    filterGames(props.games).map((item, index)=>
+    filterGames(props.games).map((item, index) =>
       <li className="game" id={index} key={index}>
         <div className="game_main">
           <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background}></img>
@@ -51,19 +51,60 @@ const gameArray = (props) => {
           <p>{item.description}</p>
           <p>{item.details}</p>
           <div className="media flex">
-            <img src={item.media[0]} width="300px"></img>
-            <img src={item.media[1]}width="300px"></img>
-            <img src={item.media[2]}width="300px"></img>
+            <img src={item.media[0]} alt={item.name + " screenshot"} width="300px"></img>
+            <img src={item.media[1]} alt={item.name + " screenshot"} width="300px"></img>
+            <img src={item.media[2]} alt={item.name + " screenshot"} width="300px"></img>
           </div>
           <div className="button" target="_blank" href={item.youtube}>Trailer</div>
           <div className="button" target="_blank" href={item.download}>Download</div>
           <div className="button" target="_blank" href={item.gitHub}>Source</div>
+          <ul className="news">{newsArray(item.news)}</ul>
         </div>
       </li>
     )
   );
 }
 
+
+class screenshotSlideshow extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {imgUrl: props[0]};
+  }
+  componentDidMount(props){
+    setInterval(()=>{
+      let indexvalue = Math.floor(Math.random() * this.props);
+      this.setState({
+        imgUrl : this.props[indexvalue]
+      });
+    }, 8000);
+  }
+
+  render(){
+    return(
+      <img src={this.state.imgUrl}/>
+    )
+  }
+}
+
+const newsArray = (props) => {
+  return(
+    props.map((item, index) =>
+    <li className="news" key={index}>
+      <h3>{item.title}</h3>
+      <span>{item.postDate}</span>
+      {newsImage(item)}
+      <p>{item.body}</p>
+    </li>
+    )
+  );
+}
+
+const newsImage = (props) => {
+  if(props.image){
+    return (<img src={props.image} alt={props.title + " news"}/>);
+  }
+}
 
 const filterGames = (props, filterBy) => {
   if(filterBy){
@@ -83,6 +124,7 @@ class AnimateBanner extends React.Component{
     super(props);
     this.state = {banner: "../art/annexback.jpg", index: 0}
   }
+
   componentDidMount(props){
     setInterval(()=>{
       let indexvalue = Math.floor(Math.random() * this.props.games.length);
