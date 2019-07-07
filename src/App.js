@@ -51,9 +51,7 @@ const gameArray = (props) => {
           <p>{item.description}</p>
           <p>{item.details}</p>
           <div className="media flex">
-            <img src={item.media[0]} alt={item.name + " screenshot"} width="300px"></img>
-            <img src={item.media[1]} alt={item.name + " screenshot"} width="300px"></img>
-            <img src={item.media[2]} alt={item.name + " screenshot"} width="300px"></img>
+          <ScreenshotSlideshow imgUrl={item.media}/>
           </div>
           <div className="button" target="_blank" href={item.youtube}>Trailer</div>
           <div className="button" target="_blank" href={item.download}>Download</div>
@@ -64,20 +62,25 @@ const gameArray = (props) => {
     )
   );
 }
+//            <img src={item.media[0]} alt={item.name + " screenshot"} width="300px"></img>
+//            <img src={item.media[1]} alt={item.name + " screenshot"} width="300px"></img>
+//            <img src={item.media[2]} alt={item.name + " screenshot"} width="300px"></img>
 
-
-class screenshotSlideshow extends React.Component {
+class ScreenshotSlideshow extends React.Component {
   constructor(props){
     super(props);
-    this.state = {imgUrl: props[0]};
+    this.state = {imgUrl: this.props.imgUrl[0]};
   }
   componentDidMount(props){
+    console.log(this.props);
+    let indexvalue = 0;
     setInterval(()=>{
-      let indexvalue = Math.floor(Math.random() * this.props);
+      indexvalue < this.props.imgUrl.length -1 ? indexvalue ++ : indexvalue = 0
+      // let indexvalue = Math.floor(Math.random() * this.props.imgUrl.length);
       this.setState({
-        imgUrl : this.props[indexvalue]
+        imgUrl : this.props.imgUrl[indexvalue]
       });
-    }, 8000);
+    }, 5000);
   }
 
   render(){

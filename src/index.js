@@ -17,5 +17,5 @@ fetch('http://localhost:8080/api/game')
   // kkgState.setState({games: myJson});
   ReactDOM.render(<App games={gameList} showngames={gameList}/>, document.getElementById('root'));
 });
-
+//jdbc:h2:file:~/krazykeetgames-test
 // registerServiceWorker();
