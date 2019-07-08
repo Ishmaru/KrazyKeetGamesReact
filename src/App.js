@@ -39,42 +39,52 @@ const handleClick = (event) =>{
 }
 
 const gameArray = (props) => {
-  return (
-    filterGames(props.games).map((item, index) =>
-      <li className="game" id={index} key={index}>
-        <img className="shadow labels" src={item.thumb} alt={item.name + " label"}/>
-        <div className="game_main">
-          <h2 className="over_title">{item.name}</h2>
-          <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
-        </div>
-        <div className="hidden">
-          <div className="more_about">
-            <div className="info shadow darker">
-              <h2>{item.name}</h2>
-              <p>{item.version}</p>
-              <p>{item.description}</p>
-              <p>{item.details}</p>
-              <div className="interactive">
-                <div className="button shadow" target="_blank" href={item.download}>Download</div>
-                <div className="button shadow" target="_blank" href={item.gitHub}>Source</div>
-                <div className="button trailer_btn shadow" target="_blank" href={item.youtube}>Trailer</div>
-              </div>
-            </div>
-            <div className="img_slideshow">
-              <ScreenshotSlideshow imgUrl={item.media}/>
-            </div>
-            <div className="news darker shadow">
-            <h3>Latest News:</h3>
-              <br/>
-              <ul>{newsArray(item.news)}</ul>
-            </div>
-
-            <div className="youtube">{YoutubeEmbed(item.youtube)}</div>
+  if(props.games.length > 0){
+    return (
+      filterGames(props.games).map((item, index) =>
+        <li className="game" id={index} key={index}>
+          <img className="shadow labels" src={item.thumb} alt={item.name + " label"}/>
+          <div className="game_main">
+            <h2 className="over_title">{item.name}</h2>
+            <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
           </div>
+          <div className="hidden">
+            <div className="more_about">
+              <div className="info shadow darker">
+                <h2>{item.name}</h2>
+                <p>{item.version}</p>
+                <p>{item.description}</p>
+                <p>{item.details}</p>
+                <div className="interactive">
+                  <div className="button shadow" target="_blank" href={item.download}>Download</div>
+                  <div className="button shadow" target="_blank" href={item.gitHub}>Source</div>
+                  <div className="button trailer_btn shadow" target="_blank" href={item.youtube}>Trailer</div>
+                </div>
+              </div>
+              <div className="img_slideshow">
+                <ScreenshotSlideshow imgUrl={item.media}/>
+              </div>
+              <div className="news darker shadow">
+              <h3>Latest News:</h3>
+                <br/>
+                <ul>{newsArray(item.news)}</ul>
+              </div>
+              <div className="youtube">{YoutubeEmbed(item.youtube)}</div>
+            </div>
+          </div>
+        </li>
+      )
+    );
+  }else{
+    return(
+      <li className="game" id="deafult">
+        <div className="game_main">
+          <h2 className="over_title ">Im sorry no games match your search...</h2>
+          <img className="game_main_img" src="../art/commandroom.jpg" alt=""></img>
         </div>
       </li>
     )
-  );
+  }
 }
 
 const YoutubeEmbed = (props) => {
@@ -169,7 +179,7 @@ const navigate = (i) =>{
 class AnimateBanner extends React.Component{
   constructor(props){
     super(props);
-    this.state = {banner: "../art/annexback.jpg", index: 0}
+    this.state = {banner: "../art/commandroom.jpg", index: 0}
   }
 
   componentDidMount(props){
@@ -185,7 +195,7 @@ class AnimateBanner extends React.Component{
   render() {
     return(
       <div className="jumbotron" onClick={() => navigate(this.state.index)}>
-        <img className="game_main_img" src={this.state.banner} alt="krazyKeetGames"/>
+        <img className="jumbotron_img" src={this.state.banner} alt="krazyKeetGames"/>
       </div>
     )
   }
