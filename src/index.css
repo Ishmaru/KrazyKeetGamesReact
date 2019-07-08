@@ -23,10 +23,10 @@ h1{
 .container {
   padding:100px;
 }
-.text_box{
+/*.text_box{
   display:inline;
   margin-top: -300px;
-}
+}*/
 .jumbotron img{
   -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
   -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
@@ -54,19 +54,24 @@ ul {
   list-style: none;
   padding-inline-start: 0px;
 }
+
 .navbar li {
   padding: 5px;
   display: inline;
 }
+
 .navbar, .media, .head{
   justify-content: space-around;
 }
+
 .game{
   margin-bottom: 50px;
 }
+
 .game_main {
   overflow: hidden;
 }
+
 .game_main_img {
   max-width: 100%;
   display: block;
@@ -82,14 +87,19 @@ ul {
   padding: 15px;
   background-color: #ffffff;
   border-radius: 3px;
-  box-shadow: 2px 2px 5px #111111;
   margin: 10px;
   color: #111111;
 }
+
 .button:hover{
   color: #ffffff;
   background-color: rgb(70,70,255);
 }
+
+.shadow{
+  box-shadow: 2px 2px 5px #111111;
+}
+
 .search{
   padding-left: 10px;
   margin-top: 20px;
@@ -101,6 +111,7 @@ ul {
   border-bottom: 2px solid #ffffff;
   border-radius: 5px;
 }
+
 .head {
   background-color: #555555;
   border-bottom: 2px solid #ffffff;
@@ -110,9 +121,50 @@ ul {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
 }
+
 .hidden {
   display:none;
 }
+
 .inline {
   display:inline;
+}
+
+
+.more_about{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.img_slideshow{
+  width: 40%;
+  display: inline-block;
+  flex-shrink: 10;
+}
+.img_slideshow img{
+  width: 100%;
+}
+.info{
+  padding:10px;
+  min-height: 300px;
+  width: 55%;
+  display:inline-flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.interactive{
+  display: inline-block;
+  padding-top: 20px;
+  height: 70px;
+}
+.youtube{
+  display: inline-block;
+}
+.news{
+  padding:10px;
+  width:55%;
+  min-height: 300px;
 }

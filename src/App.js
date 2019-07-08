@@ -14,9 +14,9 @@ class krazyKeetGames extends React.Component{
   render(){
     return(
       <div className="App">
-        <div className="flex head">
+        <div className="flex head shadow">
           <h1>Krazy Keet Games LLC</h1>
-            <input className="search" placeholder="Search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
+            <input className="search shadow" placeholder="Search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
         </div>
         {this.state.games.length > 1 ? <AnimateBanner games={this.props.games}/> : null}
         {this.state.games.length > 1 ? <NavBar games={this.state.games}/> : null}
@@ -33,10 +33,13 @@ const handleClick = (event) =>{
   event.target.parentNode.className = "game_main hidden inline";
   let indexValue = event.target.id.split("_")[1];
   let parent = event.target.parentNode.nextSibling;
-  parent.className = "text_box";
+  parent.className = "";
   // console.log(event.target);
 }
 
+//<div className="game_main_img" id={"image_"+index} style="background-color:"{item.background} onClick={handleClick}></div>
+            // <div className="button" target="_blank" href={item.youtube}>Trailer</div>
+                        // <div className="media flex">
 const gameArray = (props) => {
   // let allGames = props;
   return (
@@ -46,25 +49,44 @@ const gameArray = (props) => {
           <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background}></img>
         </div>
         <div className="hidden">
-          <h2>{item.name}</h2>
-          <p>{item.version}</p>
-          <p>{item.description}</p>
-          <p>{item.details}</p>
-          <div className="media flex">
-          <ScreenshotSlideshow imgUrl={item.media}/>
+          <div className="more_about">
+            <div className="info shadow">
+              <h2>{item.name}</h2>
+              <p>{item.version}</p>
+              <p>{item.description}</p>
+              <p>{item.details}</p>
+              <div className="interactive">
+                <div className="button shadow" target="_blank" href={item.download}>Download</div>
+                <div className="button shadow" target="_blank" href={item.gitHub}>Source</div>
+              </div>
+            </div>
+            <div className="img_slideshow">
+              <ScreenshotSlideshow imgUrl={item.media}/>
+            </div>
+            <div className="news shadow">
+            <h3>Latest News:</h3>
+              <ul>{newsArray(item.news)}</ul>
+            </div>
+
+            <div className="youtube">{YoutubeEmbed(item.youtube)}</div>
           </div>
-          <div className="button" target="_blank" href={item.youtube}>Trailer</div>
-          <div className="button" target="_blank" href={item.download}>Download</div>
-          <div className="button" target="_blank" href={item.gitHub}>Source</div>
-          <ul className="news">{newsArray(item.news)}</ul>
         </div>
       </li>
     )
   );
 }
-//            <img src={item.media[0]} alt={item.name + " screenshot"} width="300px"></img>
-//            <img src={item.media[1]} alt={item.name + " screenshot"} width="300px"></img>
-//            <img src={item.media[2]} alt={item.name + " screenshot"} width="300px"></img>
+
+const YoutubeEmbed = (props) => {
+  //Make sure Url saved in DB is compatable with crossorigin Iframe
+  let updateYoutubeLink = props.replace("https://youtu.be/", "https://www.youtube.com/embed/").replace("watch?v=", "embed/");
+  return(
+      <iframe width="320" height="200"
+      className="shadow"
+      src={updateYoutubeLink} frameborder="0"
+      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
+  );
+}
 
 class ScreenshotSlideshow extends React.Component {
   constructor(props){
@@ -75,8 +97,7 @@ class ScreenshotSlideshow extends React.Component {
     console.log(this.props);
     let indexvalue = 0;
     setInterval(()=>{
-      indexvalue < this.props.imgUrl.length -1 ? indexvalue ++ : indexvalue = 0
-      // let indexvalue = Math.floor(Math.random() * this.props.imgUrl.length);
+      indexvalue < this.props.imgUrl.length -1 ? indexvalue ++ : indexvalue = 0;
       this.setState({
         imgUrl : this.props.imgUrl[indexvalue]
       });
@@ -85,22 +106,26 @@ class ScreenshotSlideshow extends React.Component {
 
   render(){
     return(
-      <img src={this.state.imgUrl}/>
+      <img className="shadow" src={this.state.imgUrl}/>
     )
   }
 }
 
 const newsArray = (props) => {
-  return(
-    props.map((item, index) =>
-    <li className="news" key={index}>
-      <h3>{item.title}</h3>
-      <span>{item.postDate}</span>
-      {newsImage(item)}
-      <p>{item.body}</p>
-    </li>
-    )
-  );
+  if(props.length > 0){
+    return(
+      props.map((item, index) =>
+      <li className="news" key={index}>
+        <h3>{item.title}</h3>
+        <span>{item.postDate}</span>
+        {newsImage(item)}
+        <p>{item.body}</p>
+      </li>
+      )
+    );
+  } else {
+    return <p>No news posted yet.</p>
+  }
 }
 
 const newsImage = (props) => {
@@ -154,7 +179,7 @@ const NavBar = (props) => {
         {
           props.games.map((item, index)=>
             <li key={index} onClick={() => navigate(index)}>
-              <img className="" src={item.thumb} alt={item.name}/>
+              <img className="shadow" src={item.thumb} alt={item.name}/>
             </li>
           )
         }
