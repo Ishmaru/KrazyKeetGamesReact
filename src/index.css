@@ -153,19 +153,32 @@ ul {
   justify-content: space-between;
   flex-direction: column;
 }
+
+.darker{
+  background-color: #222222;
+}
+
 .interactive{
   display: inline-block;
   padding-top: 20px;
   height: 70px;
 }
+
 .youtube{
-  display: inline-block;
+  display: inline;
+  /*width:100%;*/
 }
+/*.youtube_iframe{
+  width:100%;
+  height:auto;
+}*/
+
 .youtube_iframe{
   width:320px;
   height:200px;
 }
 .news{
+
   padding:10px;
   width:55%;
   min-height: 300px;
@@ -179,6 +192,16 @@ ul {
   display: none;
 }
 
+.labels{
+  position: absolute;
+  display: inline;
+  margin-left: -128px;
+  background-color: #444444;
+}
+
+.krazykeetgames{
+  display: inline;
+}
 
 
 /*MEDIA QUERRIES*/
@@ -230,6 +253,9 @@ ul {
   }
   .more_about{
     padding-right: 0px;
+  }
+  .labels{
+    display: none;
   }
 
 /*  .game_main_img{

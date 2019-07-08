@@ -15,7 +15,10 @@ class krazyKeetGames extends React.Component{
     return(
       <div className="App">
         <div className="flex head shadow">
-          <h1 className="krazykeetgames">Krazy Keet Games LLC</h1>
+          <div>
+            <img className="krazykeetgames" src="../art/krazykeetgames.png" height="96px" alt="krazy keet games"/>
+            <h1 className="krazykeetgames">Krazy Keet Games LLC</h1>
+          </div>
           <h1 className="kkg">KKG</h1>
             <input className="search shadow" placeholder="Search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
         </div>
@@ -39,17 +42,18 @@ const handleClick = (event) =>{
 //<div className="game_main_img" id={"image_"+index} style="background-color:"{item.background} onClick={handleClick}></div>
             // <div className="button" target="_blank" href={item.youtube}>Trailer</div>
                         // <div className="media flex">
+                        // <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
 const gameArray = (props) => {
-  // let allGames = props;
   return (
     filterGames(props.games).map((item, index) =>
       <li className="game" id={index} key={index}>
+        <img className="shadow labels" src={item.thumb} alt={item.name + " label"}/>
         <div className="game_main">
           <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
         </div>
         <div className="hidden">
           <div className="more_about">
-            <div className="info shadow">
+            <div className="info shadow darker">
               <h2>{item.name}</h2>
               <p>{item.version}</p>
               <p>{item.description}</p>
@@ -63,7 +67,7 @@ const gameArray = (props) => {
             <div className="img_slideshow">
               <ScreenshotSlideshow imgUrl={item.media}/>
             </div>
-            <div className="news shadow">
+            <div className="news darker shadow">
             <h3>Latest News:</h3>
               <ul>{newsArray(item.news)}</ul>
             </div>
@@ -114,7 +118,7 @@ const newsArray = (props) => {
   if(props.length > 0){
     return(
       props.map((item, index) =>
-      <li className="news" key={index}>
+      <li key={index}>
         <h3>{item.title}</h3>
         <span>{item.postDate}</span>
         {newsImage(item)}
