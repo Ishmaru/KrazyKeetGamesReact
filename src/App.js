@@ -34,15 +34,10 @@ class krazyKeetGames extends React.Component{
 
 const handleClick = (event) =>{
   event.target.parentNode.className = "game_main hidden inline";
-  // let indexValue = event.target.id.split("_")[1];
   let parent = event.target.parentNode.nextSibling;
   parent.className = "";
 }
 
-//<div className="game_main_img" id={"image_"+index} style="background-color:"{item.background} onClick={handleClick}></div>
-            // <div className="button" target="_blank" href={item.youtube}>Trailer</div>
-                        // <div className="media flex">
-                        // <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
 const gameArray = (props) => {
   return (
     filterGames(props.games).map((item, index) =>
@@ -143,9 +138,19 @@ const formatBody = (props) => {
   let tempArr = props.split("\n");
   return(
     tempArr.map((item, index) =>
-      <p>{item}</p>
+      <p key={item}>{findUrl(item)}</p>
     )
   )
+}
+
+const findUrl = (props) => {
+  let pattern = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/i
+    console.log(props.match(pattern))
+  if(props.match(pattern)){
+    return (<strong><a target="_blank" href={props.match(pattern).input}>link: {props.match(pattern).input}</a></strong>);
+  }else{
+    return props;
+  }
 }
 
 const filterGames = (props, filterBy) => {
@@ -201,33 +206,5 @@ const NavBar = (props) => {
     </nav>
   );
 }
-
-// const NewsList = (props) => {
-//   return (
-//     props.map((item, index)=>
-//       <li>
-//         <p>{item.body}</p>
-//       </li>
-//     )
-//   )
-// }
-
-
-// class NewsSection extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       news: []
-//     }
-//   }
-//   render(){
-//     return(
-//       <div>
-//         <h2>News</h2>
-//         <ul>{NewsList(this.state.news)}</ul>
-//       </div>
-//     )
-//   }
-// }
 
 export default krazyKeetGames;

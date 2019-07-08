@@ -270,6 +270,9 @@ ul {
   .labels{
     display: none;
   }
+  .over_title{
+    display:none;
+  }
 
 /*  .game_main_img{
     width: 90%;
