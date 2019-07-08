@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {} from 'react';
 
 class krazyKeetGames extends React.Component{
   constructor(props){
@@ -15,7 +15,8 @@ class krazyKeetGames extends React.Component{
     return(
       <div className="App">
         <div className="flex head shadow">
-          <h1>Krazy Keet Games LLC</h1>
+          <h1 className="krazykeetgames">Krazy Keet Games LLC</h1>
+          <h1 className="kkg">KKG</h1>
             <input className="search shadow" placeholder="Search" name="filterBy" type="text" value={this.state.filterBy} onChange={this.handleChange} />
         </div>
         {this.state.games.length > 1 ? <AnimateBanner games={this.props.games}/> : null}
@@ -29,12 +30,10 @@ class krazyKeetGames extends React.Component{
 }
 
 const handleClick = (event) =>{
-  // event.target.className = "game_main_img text_box grayscale"
   event.target.parentNode.className = "game_main hidden inline";
-  let indexValue = event.target.id.split("_")[1];
+  // let indexValue = event.target.id.split("_")[1];
   let parent = event.target.parentNode.nextSibling;
   parent.className = "";
-  // console.log(event.target);
 }
 
 //<div className="game_main_img" id={"image_"+index} style="background-color:"{item.background} onClick={handleClick}></div>
@@ -46,7 +45,7 @@ const gameArray = (props) => {
     filterGames(props.games).map((item, index) =>
       <li className="game" id={index} key={index}>
         <div className="game_main">
-          <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background}></img>
+          <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
         </div>
         <div className="hidden">
           <div className="more_about">
@@ -58,6 +57,7 @@ const gameArray = (props) => {
               <div className="interactive">
                 <div className="button shadow" target="_blank" href={item.download}>Download</div>
                 <div className="button shadow" target="_blank" href={item.gitHub}>Source</div>
+                <div className="button trailer_btn shadow" target="_blank" href={item.youtube}>Trailer</div>
               </div>
             </div>
             <div className="img_slideshow">
@@ -80,11 +80,11 @@ const YoutubeEmbed = (props) => {
   //Make sure Url saved in DB is compatable with crossorigin Iframe
   let updateYoutubeLink = props.replace("https://youtu.be/", "https://www.youtube.com/embed/").replace("watch?v=", "embed/");
   return(
-      <iframe width="320" height="200"
-      className="shadow"
-      src={updateYoutubeLink} frameborder="0"
+      <iframe title={props}
+      className="shadow youtube_iframe"
+      src={updateYoutubeLink} frameBorder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen></iframe>
+      allowFullScreen></iframe>
   );
 }
 
@@ -94,7 +94,6 @@ class ScreenshotSlideshow extends React.Component {
     this.state = {imgUrl: this.props.imgUrl[0]};
   }
   componentDidMount(props){
-    console.log(this.props);
     let indexvalue = 0;
     setInterval(()=>{
       indexvalue < this.props.imgUrl.length -1 ? indexvalue ++ : indexvalue = 0;
@@ -106,7 +105,7 @@ class ScreenshotSlideshow extends React.Component {
 
   render(){
     return(
-      <img className="shadow" src={this.state.imgUrl}/>
+      <img className="shadow" src={this.state.imgUrl} alt="screen shots"/>
     )
   }
 }
@@ -188,32 +187,32 @@ const NavBar = (props) => {
   );
 }
 
-const NewsList = (props) => {
-  return (
-    props.map((item, index)=>
-      <li>
-        <p>{item.body}</p>
-      </li>
-    )
-  )
-}
+// const NewsList = (props) => {
+//   return (
+//     props.map((item, index)=>
+//       <li>
+//         <p>{item.body}</p>
+//       </li>
+//     )
+//   )
+// }
 
 
-class NewsSection extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      news: []
-    }
-  }
-  render(){
-    return(
-      <div>
-        <h2>News</h2>
-        <ul>{NewsList(this.state.news)}</ul>
-      </div>
-    )
-  }
-}
+// class NewsSection extends React.Component {
+//   constructor(props){
+//     super(props);
+//     this.state={
+//       news: []
+//     }
+//   }
+//   render(){
+//     return(
+//       <div>
+//         <h2>News</h2>
+//         <ul>{NewsList(this.state.news)}</ul>
+//       </div>
+//     )
+//   }
+// }
 
 export default krazyKeetGames;
