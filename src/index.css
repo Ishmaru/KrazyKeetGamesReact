@@ -69,6 +69,13 @@ ul {
 .game_main {
   overflow: hidden;
 }
+.over_title{
+  position: absolute;
+  display: inline;
+  margin-left: 20px;
+  background-color: rgba(10,10,10,0.5);
+  padding: 10px;
+}
 
 .game_main_img {
   max-width: 100%;
@@ -178,10 +185,16 @@ ul {
   height:200px;
 }
 .news{
-
   padding:10px;
   width:55%;
   min-height: 300px;
+}
+
+.news_image{
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 .kkg{

@@ -49,6 +49,7 @@ const gameArray = (props) => {
       <li className="game" id={index} key={index}>
         <img className="shadow labels" src={item.thumb} alt={item.name + " label"}/>
         <div className="game_main">
+          <h2 className="over_title">{item.name}</h2>
           <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
         </div>
         <div className="hidden">
@@ -69,6 +70,7 @@ const gameArray = (props) => {
             </div>
             <div className="news darker shadow">
             <h3>Latest News:</h3>
+              <br/>
               <ul>{newsArray(item.news)}</ul>
             </div>
 
@@ -119,10 +121,10 @@ const newsArray = (props) => {
     return(
       props.map((item, index) =>
       <li key={index}>
+        <span>Posted: {item.postDate}</span>
         <h3>{item.title}</h3>
-        <span>{item.postDate}</span>
-        {newsImage(item)}
-        <p>{item.body}</p>
+        <div>{newsImage(item)}</div>
+        <div>{formatBody(item.body)}</div>
       </li>
       )
     );
@@ -133,8 +135,17 @@ const newsArray = (props) => {
 
 const newsImage = (props) => {
   if(props.image){
-    return (<img src={props.image} alt={props.title + " news"}/>);
+    return (<img className="news_image shadow" src={props.image} alt={props.title + " news"}/>);
   }
+}
+
+const formatBody = (props) => {
+  let tempArr = props.split("\n");
+  return(
+    tempArr.map((item, index) =>
+      <p>{item}</p>
+    )
+  )
 }
 
 const filterGames = (props, filterBy) => {
