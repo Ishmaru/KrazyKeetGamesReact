@@ -5,7 +5,6 @@ import './index.css';
 
 fetch('http://localhost:8080/api/game')
 .then(function(response) {
-  console.log('hid backend')
   return response.json();
 })
 .then(function(myJson) {

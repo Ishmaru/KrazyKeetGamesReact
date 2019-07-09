@@ -155,7 +155,6 @@ const formatBody = (props) => {
 
 const findUrl = (props) => {
   let pattern = /(http|ftp|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?/i
-    console.log(props.match(pattern))
   if(props.match(pattern)){
     return (<strong><a target="_blank" href={props.match(pattern).input}>link: {props.match(pattern).input}</a></strong>);
   }else{
@@ -195,7 +194,7 @@ class AnimateBanner extends React.Component{
   render() {
     return(
       <div className="jumbotron" onClick={() => navigate(this.state.index)}>
-        <img className="jumbotron_img" src={this.state.banner} alt="krazyKeetGames"/>
+        <img className="jumbotron_img " src={this.state.banner} alt="krazyKeetGames"/>
       </div>
     )
   }
