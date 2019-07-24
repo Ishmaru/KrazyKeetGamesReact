@@ -1,5 +1,4 @@
 
-
 body{
   background-color: #333333;
   color: #ffffff;
@@ -73,12 +72,18 @@ ul {
 .game_main {
   overflow: hidden;
 }
+
 .over_title{
   position: absolute;
   display: inline;
   margin-left: 20px;
   background-color: rgba(10,10,10,0.5);
   padding: 10px;
+}
+
+.over_desc{
+  margin-top: 100px;
+  width: 60%;
 }
 
 .game_main_img, .jumbotron_img {

@@ -46,6 +46,7 @@ const gameArray = (props) => {
           <img className="shadow labels" src={item.thumb} alt={item.name + " label"}/>
           <div className="game_main">
             <h2 className="over_title">{item.name}</h2>
+            <h4 className="over_title over_desc">{item.description}</h4>
             <img id={"image_"+index} onClick={handleClick} className="game_main_img" src={item.background} alt={item.name}></img>
           </div>
           <div className="hidden">
